@@ -44,7 +44,6 @@ class Config
             'enable_telegram'         => $_ENV['enable_telegram'],
             'payment_system'          => $_ENV['payment_system'],
             'live_chat'               => $_ENV['live_chat'],
-            'crisp_id'                => $_ENV['crisp_id'],
             'mylivechat_id'           => $_ENV['mylivechat_id'],
             'enable_ticket'           => $_ENV['enable_ticket'],
             'enable_admin_contact'    => $_ENV['enable_admin_contact'],
