@@ -45,6 +45,7 @@ class Config
             'payment_system'          => $_ENV['payment_system'],
             'live_chat'               => $_ENV['live_chat'],
             'mylivechat_id'           => $_ENV['mylivechat_id'],
+            'tawk_id'                 => $_ENV['tawk_id'],
             'enable_ticket'           => $_ENV['enable_ticket'],
             'enable_admin_contact'    => $_ENV['enable_admin_contact'],
             'admin_contact1'          => $_ENV['admin_contact1'],
