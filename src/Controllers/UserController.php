@@ -7,7 +7,6 @@ use App\Services\{
     Mail,
     Config,
     Payment,
-    BitPayment,
     Gateway\ChenPay,
 };
 use App\Models\{
@@ -130,7 +129,6 @@ class UserController extends BaseController
         return $this->view()
             ->assign('codes', $codes)
             ->assign('pmw', Payment::purchaseHTML())
-            ->assign('bitpay', BitPayment::purchaseHTML())
             ->assign('render', $render)
             ->display('user/code.tpl');
     }
@@ -1196,7 +1194,7 @@ class UserController extends BaseController
     public function updateSsPwd($request, $response, $args)
     {
         $user = Auth::getUser();
-        $pwd = Tools::genRandomChar(6);
+        $pwd = Tools::genRandomChar(16);
         $current_timestamp = time();
         $new_uuid = Uuid::uuid3(Uuid::NAMESPACE_DNS, $user->email . '|' . $current_timestamp);
         $otheruuid = User::where('uuid', $new_uuid)->first();
