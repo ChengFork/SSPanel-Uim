@@ -6,8 +6,7 @@ use App\Services\{
     Auth,
     Mail,
     Config,
-    Payment,
-    Gateway\ChenPay,
+    Payment
 };
 use App\Models\{
     Ip,
@@ -41,7 +40,6 @@ use App\Utils\{
     Check,
     QQWry,
     Tools,
-    Radius,
     Cookie,
     Geetest,
     Telegram,
@@ -131,11 +129,6 @@ class UserController extends BaseController
             ->assign('pmw', Payment::purchaseHTML())
             ->assign('render', $render)
             ->display('user/code.tpl');
-    }
-
-    public function orderDelete($request, $response, $args)
-    {
-        return (new ChenPay())->orderDelete($request);
     }
 
     public function donate($request, $response, $args)
@@ -1219,8 +1212,6 @@ class UserController extends BaseController
         $user->save();
         $user->updateSsPwd($pwd);
         $res['ret'] = 1;
-
-        Radius::Add($user, $pwd);
 
         return $this->echoJson($response, $res);
     }

@@ -51,11 +51,6 @@ CREATE TABLE IF NOT EXISTS `login_ip` (
   `type`     int(11)      NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE IF NOT EXISTS `radius_ban` (
-  `id`     int(11) NOT NULL,
-  `userid` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 CREATE TABLE IF NOT EXISTS `speedtest` (
   `id`               bigint(20) NOT NULL,
   `nodeid`           int(11)    NOT NULL,
@@ -205,8 +200,6 @@ ALTER TABLE `link`
   ADD PRIMARY KEY (`id`);
 ALTER TABLE `login_ip`
   ADD PRIMARY KEY (`id`);
-ALTER TABLE `radius_ban`
-  ADD PRIMARY KEY (`id`);
 ALTER TABLE `speedtest`
   ADD PRIMARY KEY (`id`);
 ALTER TABLE `ss_invite_code`
@@ -243,8 +236,6 @@ ALTER TABLE `link`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `login_ip`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
-ALTER TABLE `radius_ban`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `speedtest`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `ss_invite_code`
@@ -529,26 +520,6 @@ CREATE TABLE IF NOT EXISTS `gconfig` (
   `last_update`    bigint(20)       NOT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='网站配置';
-
-
---
--- Telegram 任务列表
---
-CREATE TABLE IF NOT EXISTS `telegram_tasks` (
-  `id`           int(11) unsigned NOT     NULL AUTO_INCREMENT,
-  `type`         int(8)           NOT     NULL                COMMENT '任务类型',
-  `status`       int(2)           NOT     NULL DEFAULT '0'    COMMENT '任务状态',
-  `chatid`       varchar(128)     NOT     NULL DEFAULT '0'    COMMENT 'Telegram Chat ID',
-  `messageid`    varchar(128)     NOT     NULL DEFAULT '0'    COMMENT 'Telegram Message ID',
-  `content`      text             DEFAULT NULL                COMMENT '任务详细内容',
-  `process`      varchar(32)      DEFAULT NULL                COMMENT '临时任务进度',
-  `userid`       int(11)          NOT     NULL DEFAULT '0'    COMMENT '网站用户 ID',
-  `tguserid`     varchar(32)      NOT     NULL DEFAULT '0'    COMMENT 'Telegram User ID',
-  `executetime`  bigint(20)       NOT     NULL                COMMENT '任务执行时间',
-  `datetime`     bigint(20)       NOT     NULL                COMMENT '任务产生时间',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Telegram 任务列表';
-
 
 ALTER TABLE `detect_log`
   ADD `status` int(2) NOT NULL DEFAULT '0' AFTER `node_id`;
