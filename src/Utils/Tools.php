@@ -809,7 +809,7 @@ class Tools
      * @param DatatablesHelper $db
      * @param string $table
      */
-    public function reset_auto_increment($db, $table)
+    public static function reset_auto_increment($db, $table)
     {
         $maxid = $db->query(
             "SELECT `auto_increment` AS `maxid` FROM `information_schema`.`tables` WHERE `table_schema` = '" . $_ENV['db_database'] . "' AND `table_name` = '" . $table . "'"
@@ -889,5 +889,10 @@ class Tools
         }
         $html .= '</ul>';
         return $html;
+    }
+
+    public static function etag($data) {
+        $etag = sha1(json_encode($data));
+        return $etag;
     }
 }

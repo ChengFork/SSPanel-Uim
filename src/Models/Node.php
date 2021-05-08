@@ -96,43 +96,6 @@ class Node extends Model
         return $log->online_user;
     }
 
-    public function getSpeedtest()
-    {
-        $id = $this->attributes['id'];
-        $log = Speedtest::where('nodeid', $id)->orderBy('datetime', 'desc')->first();
-        if ($log == null) {
-            return '暂无数据';
-        }
-
-        return '电信延迟：' . $log->telecomping . ' 下载：' . $log->telecomeupload . ' 上传：' . $log->telecomedownload . '<br>
-		联通延迟：' . $log->unicomping . ' 下载：' . $log->unicomupload . ' 上传：' . $log->unicomdownload . '<br>
-		移动延迟：' . $log->cmccping . ' 下载：' . $log->cmccupload . ' 上传：' . $log->cmccdownload . '<br>定时测试，仅供参考';
-    }
-
-    public function getSpeedtestResult()
-    {
-        $id = $this->attributes['id'];
-        $log = Speedtest::where('nodeid', $id)->orderBy('id', 'desc')->limit(48)->get();
-        if ($log == null) {
-            return '暂无数据';
-        }
-
-        return $log;
-    }
-
-    public function getTrafficFromLogs()
-    {
-        $id = $this->attributes['id'];
-
-        $traffic = TrafficLog::where('node_id', $id)->sum('u') + TrafficLog::where('node_id', $id)->sum('d');
-
-        if ($traffic == 0) {
-            return '暂无数据';
-        }
-
-        return Tools::flowAutoShow($traffic);
-    }
-
     public function isNodeOnline()
     {
         $delay = 300;
@@ -286,7 +249,7 @@ class Node extends Model
         $item           = Tools::v2Array($this->server);
         $item['type']   = 'vmess';
         $item['remark'] = ($emoji ? Tools::addEmoji($this->name) : $this->name);
-        $item['id']     = $user->getUuid();
+        $item['id']     = $user->uuid;
         $item['class']  = $this->node_class;
         return $item;
     }
@@ -354,7 +317,7 @@ class Node extends Model
         $item['type']     = 'trojan';
         $item['address']  = $server[0];
         $item['port']     = (isset($opt['port']) ? (int) $opt['port'] : 443);
-        $item['passwd']   = $user->getUuid();
+        $item['passwd']   = $user->uuid;
         $item['host']     = $item['address'];
         if (isset($opt['host'])) {
             $item['host'] = $opt['host'];
