@@ -200,11 +200,6 @@ $_ENV['telegram_request_token']             = '';           //Telegram 机器人
 $_ENV['finance_public']                     = true;         //财务报告是否向群公开
 $_ENV['enable_welcome_message']             = true;         //机器人发送欢迎消息
 
-# 图灵
-$_ENV['enable_tuling']                      = false;         //是否开启图灵机器人
-$_ENV['tuling_apikey']                      = '';            //图灵机器人API Key
-$_ENV['tuling_apisecert']                   = '';            //图灵机器人密钥
-
 # Telegram BOT 其他选项
 $_ENV['allow_to_join_new_groups']           = true;         //允许 Bot 加入下方配置之外的群组
 $_ENV['group_id_allowed_to_join']           = [];           //允许加入的群组 ID，格式为 PHP 数组
@@ -290,7 +285,7 @@ $_ENV['enable_checkin_captcha'] = false;        //启用签到验证码
 
 
 //支付系统设置----------------------------------------------------------------------------------------
-#取值 none | codepay | f2fpay | paymentwall | spay | payjs | yftpay | bitpayx
+#取值 none | codepay | f2fpay | paymentwall | spay | payjs | yftpay | bitpayx | theadpay
 $_ENV['payment_system']       = 'none';
 
 #yft支付设置
@@ -334,8 +329,10 @@ $_ENV['bitpay_secret']        = '';
 $_ENV['payjs_mchid']          = '';
 $_ENV['payjs_key']            = '';
 
-//其他面板显示设置------------------------------------------------------------------------------------------
-$_ENV['old_index_DESC']       = '<p>够了，我无法忍受你的行为，现在你将成为我们中的一员</p>';	    //旧版本首页的文字讯息
+# 平头哥支付 https://theadpay.com/
+$_ENV['theadpay_url']         = '';
+$_ENV['theadpay_mchid']       = '';
+$_ENV['theadpay_key']         = '';
 
 #后台商品列表 销量统计
 $_ENV['sales_period']         = 30;             //统计指定周期内的销量，值为【expire/任意大于0的整数】
@@ -495,3 +492,6 @@ foreach ($_ENV['cdn_forwarded_ip'] as $cdn_forwarded_ip) {
 
 // https://sentry.io for production debugging
 $_ENV['sentry_dsn'] = '';
+
+// ClientDownload 命令解决 API 访问频率高而被限制使用的 Github access token
+$_ENV['github_access_token'] = '';
