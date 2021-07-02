@@ -8,9 +8,10 @@ use App\Services\Gateway\{
     PaymentWall,
     SPay,
     PAYJS,
-    YftPay,
     BitPayX,
-    THeadPay
+    THeadPay,
+    CoinPay,
+    EasyPay
 };
 
 class Payment
@@ -29,12 +30,14 @@ class Payment
                 return new AopF2F();
             case ('payjs'):
                 return new PAYJS($_ENV['payjs_key']);
-            case ('yftpay'):
-                return new YftPay();
             case ('bitpayx'):
                 return new BitPayX($_ENV['bitpay_secret']);
             case ('theadpay'):
                 return new THeadPay();
+            case ('coinpay'):
+                return new CoinPay(Config::get('coinpay_secret'), Config::get('coinpay_appid'));
+            case ("easypay"):
+                return new EasyPay(Config::get('easypay_app_secret'));
             default:
                 return null;
         }
